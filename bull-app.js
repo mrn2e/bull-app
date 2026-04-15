@@ -5,6 +5,7 @@
 import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
+import "./bull-pages.js";
 
 /**
  * `bull-app`
@@ -58,6 +59,8 @@ export class BullApp extends DDDSuper(I18NMixin(LitElement)) {
   <slot></slot>
 </div>`;
   }
+
+  
 
   /**
    * haxProperties integration via file reference

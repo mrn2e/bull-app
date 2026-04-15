@@ -5,6 +5,8 @@
 import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
+import "./bull-calendar.js";
+import "./bull-roster.js";
 
 /**
  * `bull-pages`
@@ -20,7 +22,7 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
 
   constructor() {
     super();
-    
+    this.activePage = 'calendar';
    }
 
   // Lit reactive properties
@@ -28,6 +30,7 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
     return {
       ...super.properties,
       title: { type: String },
+      activePage: { type: String, reflect: true },
     };
   }
 
@@ -45,6 +48,26 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         margin: var(--ddd-spacing-2);
         padding: var(--ddd-spacing-4);
       }
+      nav {
+        display: flex;
+        gap: var(--ddd-spacing-2);
+        margin-bottom: var(--ddd-spacing-4);
+      }
+      nav button {
+        padding: var(--ddd-spacing-2) var(--ddd-spacing-3);
+        border: var(--ddd-border-md);
+        border-radius: var(--ddd-radius-sm);
+        background-color: var(--ddd-theme-accent);
+      }
+      nav button:hover {
+        background-color: var(--ddd-theme-primary);
+        color: var(--ddd-theme-accent);
+      }
+      nav button.active {
+        background-color: var(--ddd-theme-primary);
+        color: var(--ddd-theme-accent);
+        font-weight: bold;
+      }
       h3 span {
         font-size: var(--bull-app-label-font-size, var(--ddd-font-size-s));
       }
@@ -53,10 +76,38 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
 
   // Lit render the HTML
   render() {
-    return html`
-<div class="wrapper">
-  <slot></slot>
-</div>`;
+  return html`
+    <div class="wrapper">
+      <button 
+        style="margin-bottom: var(--ddd-spacing-3);"
+        @click="${() => {
+          document.getElementById('demo').style.display = 'block';
+          document.getElementById('pagesContainer').style.display = 'none';
+        }}">
+        Home
+      </button>
+      <nav>
+        <button 
+          class="${this.activePage === 'calendar' ? 'active' : ''}"
+          @click="${() => this.activePage = 'calendar'}">
+          Calendar
+          
+        </button>
+        <button 
+          class="${this.activePage === 'roster' ? 'active' : ''}"
+          @click="${() => this.activePage = 'roster'}">
+          Roster
+        </button>
+      </nav>
+
+      ${this.activePage === 'calendar'
+        ? html`<bull-calendar></bull-calendar>`
+        : ''}
+
+      ${this.activePage === 'roster'
+        ? html`<bull-roster></bull-roster>`
+        : ''}
+    </div>`;
   }
 
   /**
