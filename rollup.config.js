@@ -30,6 +30,8 @@ export default {
         { src: '*.png', dest: 'public' },
         { src: '*.avif', dest: 'public' },
         { src: '*.webp', dest: 'public' },
+        { src: '*.json', dest: 'public' },
+        { src: 'locales/**', dest: 'public/locales' },
       ]
     }),
     /** Resolve bare module imports */

@@ -10,7 +10,7 @@ class BullCalendarEvents extends HTMLElement {
     this.innerHTML = `
       <style>
         .event {
-          background-color: #e0e0e0;
+          background-color: #a71d31;
           border: 1px solid #ccc;
           padding: 4px 8px;
           margin: 2px 0;
@@ -19,7 +19,7 @@ class BullCalendarEvents extends HTMLElement {
           font-size: 12px;
         }
         .event:hover {
-          background-color: #d0d0d0;
+          background-color: #f10cc;
         }
       </style>
       <div class="event">${type} vs ${opponent}</div>

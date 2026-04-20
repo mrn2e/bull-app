@@ -26,9 +26,10 @@ class BullCalendar extends HTMLElement {
           text-align: left;
           position: relative;
           min-height: 80px;
+          background-color: #f1f0cc;
         }
         th {
-          background-color: #f0f0f0;
+          background-color: #8d775f;
         }
         .day {
           position: absolute;
@@ -72,23 +73,21 @@ class BullCalendar extends HTMLElement {
   renderCalendar(events) {
     const calendarEl = this.querySelector('#calendar');
     const year = 2026;
-    const month = 3; // April (0-based)
+    const month = 3;
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
     const daysInMonth = lastDay.getDate();
-    const startDay = firstDay.getDay(); // 0 = Sunday
+    const startDay = firstDay.getDay(); 
 
     let html = '<table><thead><tr>';
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     daysOfWeek.forEach(day => html += `<th>${day}</th>`);
     html += '</tr></thead><tbody><tr>';
 
-    // Empty cells for days before the first day of the month
     for (let i = 0; i < startDay; i++) {
       html += '<td></td>';
     }
 
-    // Days of the month
     for (let day = 1; day <= daysInMonth; day++) {
       if ((startDay + day - 1) % 7 === 0 && day !== 1) {
         html += '</tr><tr>';
@@ -99,7 +98,6 @@ class BullCalendar extends HTMLElement {
       html += `<td><span class="day">${day}</span>${eventHtml}</td>`;
     }
 
-    // Fill remaining cells if needed
     const totalCells = startDay + daysInMonth;
     const remainingCells = (7 - (totalCells % 7)) % 7;
     for (let i = 0; i < remainingCells; i++) {
