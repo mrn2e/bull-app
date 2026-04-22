@@ -11,6 +11,7 @@ import{D as f,i as m,b as x,I as y,a as E}from"./c3fc54f1.js";/**
           cursor: pointer;
           border-radius: 4px;
           font-size: 12px;
+          color: #d5bf86;
         }
         .event:hover {
           background-color: #f10cc;
