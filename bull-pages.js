@@ -92,18 +92,13 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
           class="${this.activePage === 'calendar' ? 'active' : ''}"
           @click="${() => this.activePage = 'calendar'}">
           Calendar
-          
         </button>
         <button 
           class="${this.activePage === 'roster' ? 'active' : ''}"
           @click="${() => this.activePage = 'roster'}">
           Roster
         </button>
-        <button 
-          class="${this.activePage === 'events' ? 'active' : ''}"
-          @click="${() => this.activePage = 'events'}">
-          Events
-        </button>
+        <button
       </nav>
 
       ${this.activePage === 'calendar'
@@ -112,10 +107,6 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
 
       ${this.activePage === 'roster'
         ? html`<bull-roster></bull-roster>`
-        : ''}
-
-      ${this.activePage === 'events'
-        ? html`<bull-events></bull-events>`
         : ''}
     </div>`;
   }

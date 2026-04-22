@@ -166,6 +166,10 @@
   </div>
   <div id="pagesContainer" style="display: none;">
     <bull-pages activePage="calendar"></bull-pages>
+    <bull-pages activePage="about"></bull-pages>
+  </div>
+ 
+
   </div>
 
   <script>
@@ -177,7 +181,22 @@
       banner.addEventListener('calendar-click', () => {
         demo.style.display = 'none';
         pagesContainer.style.display = 'block';
+        const bullPages = pagesContainer.querySelector('bull-pages');
+        if (bullPages) bullPages.activePage = 'calendar';
       });
+
+      banner.addEventListener('about-click', () => {
+        demo.style.display = 'none';
+        pagesContainer.style.display = 'block';
+        const bullPages = pagesContainer.querySelector('bull-pages');
+        if (bullPages) bullPages.activePage = 'about';
+      });
+
+      banner.addEventListener('home-click', () => {
+        demo.style.display = 'block';
+        pagesContainer.style.display = 'none';
+      });
+
     }
   </script>
 </body>
@@ -185,8 +204,8 @@
 
 
 
-//3f0d12
+<!-- //3f0d12
 //a71d31
 //f1f0cc
 //d5bf86
-//8d775f
+//8d775f -->

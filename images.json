@@ -1,0 +1,23 @@
+{
+  "logo": "bull-icon-color.png",
+  "hero": "heroimage.jpg",
+  "playlist": [
+    "headerimage1.jpg",
+    "headerimage2.jpeg",
+    "headerimage3.jpeg"
+  ],
+  "players": [
+    "player1.jpg",
+    "player2.jpeg",
+    "player3.png",
+    "player4.jpg",
+    "player5.jpg"
+  ],
+  "bulls": [
+    "bull1.jpg",
+    "bull2real.png",
+    "bull3real.png",
+    "bull4-real.png",
+    "bull5.jpg"
+  ]
+}

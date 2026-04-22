@@ -9,6 +9,7 @@ import "./bull-calendar.js";
 import "./bull-roster.js";
 import "./bull-events.js";
 
+
 /**
  * `bull-banner`
  * 
@@ -41,7 +42,6 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
       background: #8d775f;
       color: #f1f0cc;
       padding: calc(var(--ddd-spacing-3, 0.75rem) + 0.5rem);
-      border-radius: 1rem;
       margin-bottom: var(--ddd-spacing-4, 1rem);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
     }
@@ -101,11 +101,22 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
     .header-buttons button:hover {
       background: #8a1827;
     }
+    .title-wrapper img {
+      cursor: pointer;
+    }
+    .title-wrapper img:hover {
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
     `];
   }
 
   handleCalendarClick = () => {
     this.dispatchEvent(new CustomEvent('calendar-click', { bubbles: true, composed: true }));
+  };
+
+  handleHomeClick = () => {
+    this.dispatchEvent(new CustomEvent('home-click', { bubbles: true, composed: true }));
   };
 
   // Lit render the HTML
@@ -115,7 +126,7 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
     <div class="top-banner">
       <header class="page-header">
         <div class="title-wrapper">
-          <img src="bull-icon-color.png" alt="Bull icon">
+          <img src="bull-icon-color.png" alt="Bull icon" @click=${this.handleHomeClick}>
           <div class="title-text">
             <h1>Bull Poker League</h1>
             <h2>Home of the Holy Cow High Rollers</h2>
