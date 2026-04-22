@@ -17,6 +17,7 @@ class BullCalendarEvents extends HTMLElement {
           cursor: pointer;
           border-radius: 4px;
           font-size: 12px;
+          color: #d5bf86;
         }
         .event:hover {
           background-color: #f10cc;
