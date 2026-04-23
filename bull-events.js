@@ -9,7 +9,7 @@ class BullEvents extends HTMLElement {
       <style>
         :host {
           display: block;
-          padding: 16px;
+          padding: var(--ddd-spacing-4);
         }
         #events {
           max-width: 1200px;
@@ -18,18 +18,18 @@ class BullEvents extends HTMLElement {
         .events-container {
           max-height: 400px;
           overflow-y: auto;
-          border: 1px solid #ccc;
-          padding: 8px;
+          border: var(--ddd-border-xs);
+          padding: var(--ddd-spacing-2);
         }
         .event-item {
-          margin: 4px 0;
-          padding: 8px;
-          background-color: #f9f9f9;
-          border-radius: 4px;
+          margin: var(--ddd-spacing-1) 0;
+          padding: var(--ddd-spacing-2);
+          background-color: var(--ddd-theme-default-slateMaxLight);
+          border-radius: var(--ddd-radius-xs);
           cursor: pointer;
         }
         .event-item:hover {
-          background-color: #e9e9e9;
+          background-color: var(--ddd-theme-default-slateLight);
         }
       </style>
       <div id="events"></div>

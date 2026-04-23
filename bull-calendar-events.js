@@ -10,17 +10,17 @@ class BullCalendarEvents extends HTMLElement {
     this.innerHTML = `
       <style>
         .event {
-          background-color: #a71d31;
-          border: 1px solid #ccc;
+          background-color: var(--ddd-theme-default-original87Pink);
+          border: var(--ddd-border-xs);
           padding: 4px 8px;
           margin: 2px 0;
           cursor: pointer;
-          border-radius: 4px;
-          font-size: 12px;
-          color: #d5bf86;
+          border-radius: var(--ddd-radius-xs);
+          font-size: var(--ddd-font-size-4xs);
+          color: var(--ddd-theme-default-alertUrgent);
         }
         .event:hover {
-          background-color: #f10cc;
+          background-color: var(--ddd-theme-default-warningLight);
         }
       </style>
       <div class="event">${type} vs ${opponent}</div>

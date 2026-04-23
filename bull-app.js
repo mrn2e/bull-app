@@ -38,8 +38,8 @@ export class BullApp extends DDDSuper(I18NMixin(LitElement)) {
     css`
       :host {
         display: block;
-        color:#d5bf86;
-        background-color: #d5bf86;
+        color: var(--ddd-theme-default-alertUrgent);
+        background-color: var(--ddd-theme-default-alertUrgent);
         font-family: var(--ddd-font-navigation);
       }
       .wrapper {

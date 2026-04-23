@@ -37,18 +37,18 @@ export class BullFooter extends DDDSuper(I18NMixin(LitElement)) {
       display: block;
     }
     .top-banner {
-      background: #8d775f;
-      color: #f1f0cc;
+      background: var(--ddd-theme-default-shrineTan);
+      color: var(--ddd-theme-default-warningLight);
       padding: calc(var(--ddd-spacing-3, 0.75rem) + 0.5rem);
       margin-bottom: var(--ddd-spacing-4, 1rem);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+      box-shadow: var(--ddd-boxShadow-0);
     }
       .top-banner .page-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: var(--ddd-spacing-4, 1rem);
-      margin: 0;
+      margin: var(--ddd-spacing-0);
     }
     .page-header {
       display: flex;
@@ -78,8 +78,8 @@ export class BullFooter extends DDDSuper(I18NMixin(LitElement)) {
     }
     .title-text h2 {
       font-size: 1rem;
-      color: #5a2a2f;
-      font-weight: 400;
+      color: var(--ddd-theme-default-error);
+      font-weight: var(--ddd-font-weight-regular);
     }
     .title-text {
       display: flex;
@@ -98,7 +98,7 @@ export class BullFooter extends DDDSuper(I18NMixin(LitElement)) {
         gap: var(--ddd-spacing-2);
     }
     img{
-        padding: 10px;
+        padding: var(--ddd-spacing-3);
     }
     `];
   }

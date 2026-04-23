@@ -10,7 +10,7 @@ class BullCalendar extends HTMLElement {
       <style>
         :host {
           display: block;
-          padding: 16px;
+          padding: var(--ddd-spacing-4);
         }
         #calendar {
           max-width: 1200px;
@@ -21,37 +21,37 @@ class BullCalendar extends HTMLElement {
           border-collapse: collapse;
         }
         th, td {
-          border: 3px solid #ccc;
-          padding: 16px;
+          border: var(--ddd-border-md);
+          padding: var(--ddd-spacing-4);
           text-align: left;
           position: relative;
           min-height: 80px;
-          background-color: #f1f0cc;
+          background-color: var(--ddd-theme-default-warningLight);
         }
         th {
-          background-color: #8d775f;
+          background-color: var(--ddd-theme-default-warning);
         }
         .day {
           position: absolute;
-          top: 4px;
-          right: 4px;
-          font-size: 12px;
+          top: var(--ddd-spacing-1);
+          right: var(--ddd-spacing-1);
+          font-size: var(--ddd-font-size-4xs);
           font-weight: bold;
         }
         #events-list {
-          margin-top: 20px;
+          margin-top: var(--ddd-spacing-5);
         }
         .events-container {
           max-height: 200px;
           overflow-y: auto;
-          border: 1px solid #ccc;
-          padding: 8px;
+          border: var(--ddd-border-xs);
+          padding: var(--ddd-spacing-2);
         }
         .event-item {
-          margin: 4px 0;
-          padding: 4px;
+          margin: var(--ddd-spacing-1) 0;
+          padding: var(--ddd-spacing-1);
           background-color: #f9f9f9;
-          border-radius: 4px;
+          border-radius: var(--ddd-radius-xs);
         }
       </style>
       <div id="calendar"></div>
