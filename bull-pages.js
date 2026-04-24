@@ -73,34 +73,34 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         font-size: var(--bull-app-label-font-size, var(--ddd-font-size-s));
       }
       .team-box {
-        background: rgba(61, 33, 18, 0.95);
-        border-radius: 1rem;
+        background: var(--ddd-theme-default-original87Pink);
+        border-radius: 16px;
         padding: var(--ddd-spacing-4);
         margin-bottom: var(--ddd-spacing-4);
-        box-shadow: inset 0 0 0 1px rgba(241, 240, 204, 0.12);
+        box-shadow: var(--ddd-boxShadow-sm) var(--ddd-theme-default-original87Pink);
       }
       .team-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: var(--ddd-spacing-3);
-        padding: 1rem 0;
-        border-bottom: 1px solid rgba(241, 240, 204, 0.12);
+        padding: 16px 0;
+        border-bottom: var(--ddd-border-xs) var(--ddd-theme-default-original87Pink);
       }
       .team-row:last-child {
         border-bottom: none;
-        padding-bottom: 0;
+        padding-bottom: var(--ddd-spacing-0);
       }
       .team-label {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #f1f0cc;
+        font-size: 20px;
+        font-weight: var(--ddd-font-weight-bold);
+        color: var(--ddd-theme-default-slateMaxLight);
         white-space: nowrap;
       }
       .team-images {
         display: grid;
         grid-template-columns: repeat(5, minmax(48px, 1fr));
-        gap: 0.75rem;
+        gap: 12px;
         width: min(100%, 60%);
       }
       .team-images img {
@@ -108,8 +108,8 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         aspect-ratio: 1 / 1;
         height: auto;
         object-fit: cover;
-        border-radius: 0.75rem;
-        border: 2px solid rgba(241, 240, 204, 0.14);
+        border-radius: 12px;
+        border: var(--ddd-border-xs) var(--ddd-theme-default-original87Pink);
       }
     `];
   }

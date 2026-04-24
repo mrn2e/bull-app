@@ -36,7 +36,7 @@ class BullCalendar extends HTMLElement {
           top: var(--ddd-spacing-1);
           right: var(--ddd-spacing-1);
           font-size: var(--ddd-font-size-4xs);
-          font-weight: bold;
+          font-weight: var(--ddd-font-weight-bold);
         }
         #events-list {
           margin-top: var(--ddd-spacing-5);
@@ -50,7 +50,7 @@ class BullCalendar extends HTMLElement {
         .event-item {
           margin: var(--ddd-spacing-1) 0;
           padding: var(--ddd-spacing-1);
-          background-color: #f9f9f9;
+          background-color: var(--ddd-theme-default-slateMaxLight);
           border-radius: var(--ddd-radius-xs);
         }
       </style>

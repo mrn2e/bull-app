@@ -49,7 +49,7 @@ export class BullPlaylist extends DDDSuper(I18NMixin(LitElement)) {
       .playlist {
         position: relative;
         width: 100%;
-        background-color: #000;
+        background-color: var(--ddd-theme-default-potentialMidnight);
       }
       .arrows {
         position: absolute;
@@ -68,7 +68,7 @@ export class BullPlaylist extends DDDSuper(I18NMixin(LitElement)) {
       }
       .indicators {
         position: absolute;
-        bottom: 0;
+        bottom: var(--ddd-spacing-0);
         width: 100%;
       }
     `];

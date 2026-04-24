@@ -66,18 +66,18 @@ export class BullFooter extends DDDSuper(I18NMixin(LitElement)) {
       width: 56px;
       height: auto;
       display: block;
-      border-radius: 0.5rem;
+      border-radius: 8px;
     }
     .title-text h1,
     .title-text h2 {
-      margin: 0;
+      margin: var(--ddd-spacing-0);
     }
     .title-text h1 {
-      font-size: 1.75rem;
+      font-size: 28px;
       line-height: 1.1;
     }
     .title-text h2 {
-      font-size: 1rem;
+      font-size: 16px;
       color: var(--ddd-theme-default-error);
       font-weight: var(--ddd-font-weight-regular);
     }
