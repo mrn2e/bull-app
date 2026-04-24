@@ -167,7 +167,6 @@
   </div>
   <div id="pagesContainer" style="display: none;">
     <bull-pages activePage="calendar"></bull-pages>
-    <bull-pages activePage="about"></bull-pages>
   </div>
  
 <bull-footer></bull-footer>
@@ -184,6 +183,13 @@
         pagesContainer.style.display = 'block';
         const bullPages = pagesContainer.querySelector('bull-pages');
         if (bullPages) bullPages.activePage = 'calendar';
+      });
+
+      banner.addEventListener('roster-click', () => {
+        demo.style.display = 'none';
+        pagesContainer.style.display = 'block';
+        const bullPages = pagesContainer.querySelector('bull-pages');
+        if (bullPages) bullPages.activePage = 'roster';
       });
 
       banner.addEventListener('about-click', () => {
