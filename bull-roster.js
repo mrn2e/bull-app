@@ -72,7 +72,7 @@ export class BullRoster extends DDDSuper(I18NMixin(LitElement)) {
   return html`
     ${roster.map(item => html`
       <img
-        src="${new URL(item.imgSrc, import.meta.url).href}"
+        src="${item.imgSrc}"
         alt="${item.alt}"
         loading="lazy"
       >

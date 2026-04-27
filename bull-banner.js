@@ -152,7 +152,7 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
     <div class="top-banner">
       <header class="page-header">
         <div class="title-wrapper">
-          <img src="${new URL(headerData?.imgSrc || 'images/bull-icon-color.png', import.meta.url).href}" alt="Bull icon" alt="Bull icon" @click=${this.handleHomeClick}>
+          <img src="${headerData?.imgSrc || '/images/bull-icon-color.png'}" alt="Bull icon" alt="Bull icon" @click=${this.handleHomeClick}>
           <div class="title-text">
             <h1>Bull Poker League</h1>
             <h2>Home of the Holy Cow High Rollers</h2>

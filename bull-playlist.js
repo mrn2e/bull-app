@@ -41,7 +41,7 @@ async loadRosterData() {
         item.alt === "headerimage2" ||
         item.alt === "headerimage3"
       )
-      .map(item => new URL(item.imgSrc, import.meta.url).href);
+      .map(item => item.imgSrc);
 
     this.requestUpdate();
   } catch (e) {
