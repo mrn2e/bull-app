@@ -30,9 +30,7 @@ export class BullPlaylist extends DDDSuper(I18NMixin(LitElement)) {
 
 async loadRosterData() {
   try {
-    const response = await fetch(
-      new URL("./bull-roster-data.json", import.meta.url)
-    );
+    const response = await fetch('/bull-roster-data.json');
     const data = await response.json();
 
     this.images = data.header
