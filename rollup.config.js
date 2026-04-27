@@ -31,6 +31,7 @@ export default {
         { src: '*.avif', dest: 'public' },
         { src: '*.webp', dest: 'public' },
         { src: '*.json', dest: 'public' },
+        { src: 'images/**', dest: 'public/images' },
         { src: 'locales/**', dest: 'public/locales' },
       ]
     }),
