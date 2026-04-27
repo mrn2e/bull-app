@@ -30,7 +30,7 @@ export class BullFooter extends DDDSuper(I18NMixin(LitElement)) {
   async loadRosterData() {
     if (rosterData) return;
     try {
-      const response = await fetch('/bull-roster-data.json');
+      const response = await fetch(new URL('./bull-roster-data.json', import.meta.url));
       rosterData = await response.json();
       this.requestUpdate();
     } catch (e) {
