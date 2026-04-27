@@ -18,10 +18,24 @@ export class BullRoster extends DDDSuper(I18NMixin(LitElement)) {
     return "bull-roster";
   }
 
+  static rosterData = null;
+
   constructor() {
     super();
+    this.loadRosterData();
     
    }
+
+  async loadRosterData() {
+    if (BullRoster.rosterData) return;
+    try {
+      const response = await fetch(new URL('./bull-roster-data.json', import.meta.url));
+      BullRoster.rosterData = await response.json();
+      this.requestUpdate();
+    } catch (e) {
+      console.error('Failed to load roster data:', e);
+    }
+  }
 
   // Lit reactive properties
   static get properties() {
@@ -36,28 +50,35 @@ export class BullRoster extends DDDSuper(I18NMixin(LitElement)) {
     return [super.styles,
     css`
       :host {
-        display: block;
-        color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
-        font-family: var(--ddd-font-navigation);
+        display: contents;
       }
-      .wrapper {
-        margin: var(--ddd-spacing-2);
-        padding: var(--ddd-spacing-4);
-      }
-      h3 span {
-        font-size: var(--bull-app-label-font-size, var(--ddd-font-size-s));
+      img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        height: auto;
+        object-fit: cover;
+        border-radius: 12px;
+        border: var(--ddd-border-xs) var(--ddd-theme-default-original87Pink);
       }
     `];
   }
 
   // Lit render the HTML
   render() {
-    return html`
-<div class="wrapper">
-  <slot></slot>
-</div>`;
-  }
+  const team = this.classList.contains('bulls') ? 'bulls' : 'players';
+  const rosterData = BullRoster.rosterData || {};
+  const roster = rosterData[team] || rosterData.players || [];
+
+  return html`
+    ${roster.map(item => html`
+      <img
+        src="${new URL(item.imgSrc, import.meta.url).href}"
+        alt="${item.alt}"
+        loading="lazy"
+      >
+    `)}
+  `;
+}
 
   /**
    * haxProperties integration via file reference

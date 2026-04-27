@@ -9,6 +9,8 @@ import "./bull-calendar.js";
 import "./bull-roster.js";
 import "./bull-events.js";
 
+let rosterData = null;
+
 
 /**
  * `bull-banner`
@@ -20,6 +22,22 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
 
   static get tag() {
     return "bull-banner";
+  }
+
+  constructor() {
+    super();
+    this.loadRosterData();
+  }
+
+  async loadRosterData() {
+    if (rosterData) return;
+    try {
+      const response = await fetch(new URL('./bull-roster-data.json', import.meta.url));
+      rosterData = await response.json();
+      this.requestUpdate();
+    } catch (e) {
+      console.error('Failed to load roster data:', e);
+    }
   }
 
   // Lit reactive properties
@@ -128,12 +146,13 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
 
   // Lit render the HTML
   render() {
+  const headerData = rosterData?.header?.find(item => item.alt === 'bullicon');
   return html`
 
     <div class="top-banner">
       <header class="page-header">
         <div class="title-wrapper">
-          <img src="bull-icon-color.png" alt="Bull icon" @click=${this.handleHomeClick}>
+          <img src="${new URL(headerData?.imgSrc || 'images/bull-icon-color.png', import.meta.url).href}" alt="Bull icon" alt="Bull icon" @click=${this.handleHomeClick}>
           <div class="title-text">
             <h1>Bull Poker League</h1>
             <h2>Home of the Holy Cow High Rollers</h2>

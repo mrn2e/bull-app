@@ -2,11 +2,10 @@
 <html lang="en">
 
 <head>
-  <base href="/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="Description" content="Demonstration for bull-app">
-  <link rel="icon" href="bull-icon-color.png">
+  <link rel="icon" href="images/bull-icon-color.png">
 
   <style>
     :root {
@@ -39,7 +38,7 @@
       max-width: 1920px;
       min-height: 360px;
       margin-bottom: var(--ddd-spacing-4);
-      background: center / cover no-repeat url("heroimage.jpg");
+      background: center / cover no-repeat url("images/heroimage.jpg");
       display: grid;
       place-items: center;
       overflow: hidden;
@@ -126,6 +125,7 @@
   <script type="module" src="./bull-banner.js"></script>
   <script type="module" src="./bull-pages.js"></script>
   <script type="module" src="./bull-footer.js"></script>
+  <script type="module" src="./bull-roster.js"></script>
 <body>
   <bull-banner></bull-banner>
 
@@ -142,21 +142,13 @@
       <div class="team-row">
         <div class="team-label">Players</div>
         <div class="team-images">
-          <img src="player1.jpg" alt="Player 1">
-          <img src="player2.jpeg" alt="Player 2">
-          <img src="player3.png" alt="Player 3">
-          <img src="player4.jpg" alt="Player 4">
-          <img src="player5.jpg" alt="Player 5">
+          <bull-roster class="players"></bull-roster>
         </div>
       </div>
       <div class="team-row">
         <div class="team-label">Bulls</div>
         <div class="team-images">
-          <img src="bull1.jpg" alt="Bull 1">
-          <img src="bull2real.png" alt="Bull 2">
-          <img src="bull3real.png" alt="Bull 3">
-          <img src="bull4-real.png" alt="Bull 4">
-          <img src="bull5.jpg" alt="Bull 5">
+          <bull-roster class="bulls"></bull-roster>
         </div>
       </div>
     </section>

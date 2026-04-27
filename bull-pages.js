@@ -9,6 +9,8 @@ import "./bull-calendar.js";
 import "./bull-roster.js";
 import "./bull-events.js";
 
+let rosterData = null;
+
 /**
  * `bull-pages`
  * 
@@ -24,7 +26,19 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
   constructor() {
     super();
     this.activePage = 'calendar';
-   }
+    this.loadRosterData();
+  }
+
+  async loadRosterData() {
+    if (rosterData) return;
+    try {
+      const response = await fetch(new URL('./bull-roster-data.json', import.meta.url));
+      rosterData = await response.json();
+      this.requestUpdate();
+    } catch (e) {
+      console.error('Failed to load roster data:', e);
+    }
+  }
 
   // Lit reactive properties
   static get properties() {
@@ -127,21 +141,21 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
           <div class="team-row">
             <div class="team-label">Players</div>
             <div class="team-images">
-              <img src="player1.jpg" alt="Player 1">
-              <img src="player2.jpeg" alt="Player 2">
-              <img src="player3.png" alt="Player 3">
-              <img src="player4.jpg" alt="Player 4">
-              <img src="player5.jpg" alt="Player 5">
+              <img src="images/player1.jpg" alt="Player 1">
+              <img src="images/player2.jpeg" alt="Player 2">
+              <img src="images/player3.png" alt="Player 3">
+              <img src="images/player4.jpg" alt="Player 4">
+              <img src="images/player5.jpg" alt="Player 5">
             </div>
           </div>
           <div class="team-row">
             <div class="team-label">Bulls</div>
             <div class="team-images">
-              <img src="bull1.jpg" alt="Bull 1">
-              <img src="bull2real.png" alt="Bull 2">
-              <img src="bull3real.png" alt="Bull 3">
-              <img src="bull4-real.png" alt="Bull 4">
-              <img src="bull5.jpg" alt="Bull 5">
+              <img src="images/bull1.jpg" alt="Bull 1">
+              <img src="images/bull2real.png" alt="Bull 2">
+              <img src="images/bull3real.png" alt="Bull 3">
+              <img src="images/bull4-real.png" alt="Bull 4">
+              <img src="images/bull5.jpg" alt="Bull 5">
             </div>
           </div>
         </section>`
