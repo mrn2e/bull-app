@@ -55,8 +55,8 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
     css`
       :host {
         display: block;
-        color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
+        color: var(--ddd-theme-default-original87Pink);
+        background-color: var(--ddd-theme-default-alertUrgent);
         font-family: var(--ddd-font-navigation);
       }
       .wrapper {
@@ -125,6 +125,14 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         border-radius: 12px;
         border: var(--ddd-border-xs) var(--ddd-theme-default-original87Pink);
       }
+      iframe {
+        width: 100%;
+        max-width: 560px;
+        height: 315px;
+        margin: var(--ddd-spacing-4) 0;
+        border-radius: var(--ddd-radius-lg);
+        border: none;
+      }
     `];
   }
 
@@ -157,8 +165,12 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
               <img src="/images/bull4-real.png" alt="Bull 4">
               <img src="/images/bull5.jpg" alt="Bull 5">
             </div>
-          </div>
-        </section>`
+          </section>
+          
+          <p style="padding: var(--ddd-spacing-4); color: var(--ddd-theme-default-original87Pink);">
+            Our majestic bulls are the heart of the Bull Poker League. These magnificent creatures represent strength, tradition, and the wild spirit of competition.
+          </p>
+        `
         : ''}
 
       ${this.activePage === 'about'
@@ -169,8 +181,18 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
             <p>To create an exciting and competitive poker environment where skill, strategy, and a bit of luck determine the champions.</p>
             <h3>Featured Players & Bulls</h3>
             <p>Our league showcases talented players competing alongside our iconic bull mascots. Check out our roster to learn more about each participant.</p>
+            <iframe 
+              width="560" 
+              height="315" 
+              src="https://www.youtube.com/embed/z7uSSd8IhCw" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+            </iframe>
           </div>`
         : ''}
+        
     </div>`;
   }
 
