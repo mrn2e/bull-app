@@ -88,7 +88,7 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
       }
       .team-box {
         background: var(--ddd-theme-default-original87Pink);
-        border-radius: 16px;
+        border-radius: var(--ddd-radius-lg);
         padding: var(--ddd-spacing-4);
         margin-bottom: var(--ddd-spacing-4);
         box-shadow: var(--ddd-boxShadow-sm) var(--ddd-theme-default-original87Pink);
@@ -106,7 +106,7 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         padding-bottom: var(--ddd-spacing-0);
       }
       .team-label {
-        font-size: 20px;
+        font-size: var(--ddd-font-size-3xs);
         font-weight: var(--ddd-font-weight-bold);
         color: var(--ddd-theme-default-slateMaxLight);
         white-space: nowrap;
@@ -114,7 +114,7 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
       .team-images {
         display: grid;
         grid-template-columns: repeat(5, minmax(48px, 1fr));
-        gap: 12px;
+        gap: var(--ddd-spacing-3);
         width: min(100%, 60%);
       }
       .team-images img {
@@ -122,7 +122,7 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         aspect-ratio: 1 / 1;
         height: auto;
         object-fit: cover;
-        border-radius: 12px;
+        border-radius: var(--ddd-radius-md);
         border: var(--ddd-border-xs) var(--ddd-theme-default-original87Pink);
       }
     `];
@@ -141,21 +141,21 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
           <div class="team-row">
             <div class="team-label">Players</div>
             <div class="team-images">
-              <img src="/images/player1.jpg" alt="Player 1">
-              <img src="/images/player2.jpeg" alt="Player 2">
-              <img src="/images/player3.png" alt="Player 3">
-              <img src="/images/player4.jpg" alt="Player 4">
-              <img src="/images/player5.jpg" alt="Player 5">
+              <img src="/images/player1.jpg" alt="Player 1" loading="lazy">
+              <img src="/images/player2.jpeg" alt="Player 2" loading="lazy">
+              <img src="/images/player3.png" alt="Player 3" loading="lazy">
+              <img src="/images/player4.jpg" alt="Player 4" loading="lazy">
+              <img src="/images/player5.jpg" alt="Player 5" loading="lazy">
             </div>
           </div>
           <div class="team-row">
             <div class="team-label">Bulls</div>
             <div class="team-images">
-              <img src="/images/bull1.jpg" alt="Bull 1">
-              <img src="/images/bull2real.png" alt="Bull 2">
-              <img src="/images/bull3real.png" alt="Bull 3">
-              <img src="/images/bull4-real.png" alt="Bull 4">
-              <img src="/images/bull5.jpg" alt="Bull 5">
+              <img src="/images/bull1.jpg" alt="Bull 1" loading="lazy">
+              <img src="/images/bull2real.png" alt="Bull 2" loading="lazy">
+              <img src="/images/bull3real.png" alt="Bull 3" loading="lazy">
+              <img src="/images/bull4-real.png" alt="Bull 4" loading="lazy">
+              <img src="/images/bull5.jpg" alt="Bull 5" loading="lazy">
             </div>
           </div>
         </section>`

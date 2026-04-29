@@ -86,25 +86,25 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
       width: 56px;
       height: auto;
       display: block;
-      border-radius: 8px;
+      border-radius: var(--ddd-radius-sm);
     }
     .title-text h1,
     .title-text h2 {
       margin: var(--ddd-spacing-0);
     }
     .title-text h1 {
-      font-size: 28px;
+      font-size: var(--ddd-font-size-3xs);
       line-height: 1.1;
     }
     .title-text h2 {
-      font-size: 16px;
+      font-size: var(--ddd-font-size-3xs);
       color: var(--ddd-theme-default-error);
       font-weight: var(--ddd-font-weight-regular);
     }
     .header-buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: var(--ddd-spacing-3);
       justify-content: flex-end;
     }
     .header-buttons button {
@@ -152,7 +152,7 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
     <div class="top-banner">
       <header class="page-header">
         <div class="title-wrapper">
-          <img src="${headerData?.imgSrc || '/images/bull-icon-color.png'}" alt="Bull icon" alt="Bull icon" @click=${this.handleHomeClick}>
+          <img src="${headerData?.imgSrc || '/images/bull-icon-color.png'}" alt="Bull icon" alt="Bull icon" loading="lazy" @click=${this.handleHomeClick}>
           <div class="title-text">
             <h1>Bull Poker League</h1>
             <h2>Home of the Holy Cow High Rollers</h2>

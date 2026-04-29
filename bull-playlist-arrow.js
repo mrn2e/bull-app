@@ -42,7 +42,7 @@ export class BullPlaylistArrow extends DDDSuper(I18NMixin(LitElement)) {
         border-radius: 50%;
         color: var(--ddd-theme-default-white);
         cursor: pointer;
-        font-size: 32px;
+        font-size: var(--ddd-font-size-3xs);
         width: 48px;
         height: 48px;
         display: flex;

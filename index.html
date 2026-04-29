@@ -42,11 +42,11 @@
       display: grid;
       place-items: center;
       overflow: hidden;
-      border-radius: 16px;
+      border-radius: var(--ddd-radius-lg);
     }
     .hero-overlay {
       position: absolute;
-      inset: 0;
+      inset: var(--ddd-spacing-0);
       background: var(--ddd-theme-default-potentialMidnight);
       backdrop-filter: brightness(0.75);
       pointer-events: none;
@@ -66,13 +66,13 @@
       line-height: 1.05;
     }
     .hero-text p {
-      margin: 0;
+      margin: var(--ddd-spacing-0);
       font-size: clamp(1rem, 2vw, 1.25rem);
       color: var(--ddd-theme-default-warningLight);
     }
     .team-box {
       background: var(--ddd-theme-default-error);
-      border-radius: 16px;
+      border-radius: var(--ddd-radius-lg);
       padding: var(--ddd-spacing-4);
       margin-bottom: var(--ddd-spacing-4);
       box-shadow: var(--ddd-boxShadow-sm) var(--ddd-theme-default-error);
@@ -82,7 +82,7 @@
       align-items: center;
       justify-content: space-between;
       gap: var(--ddd-spacing-3);
-      padding: 1rem 0;
+      padding: var(--ddd-radius-lg);
       border-bottom:var(--ddd-border-xs) var(--ddd-theme-default-error);
     }
     .team-row:last-child {
@@ -90,7 +90,7 @@
       padding-bottom: var(--ddd-spacing-0);
     }
     .team-label {
-      font-size: 20px;
+      font-size: var(--ddd-font-size-3xs);
       font-weight: var(--ddd-font-size-bold);
       color: var(--ddd-theme-default-warningLight);
       white-space: nowrap;
@@ -98,7 +98,7 @@
     .team-images {
       display: grid;
       grid-template-columns: repeat(5, minmax(48px, 1fr));
-      gap: 12px;
+      gap: var(--ddd-spacing-3);
       width: min(100%, 60%);
     }
     .team-images img {
@@ -106,7 +106,7 @@
       aspect-ratio: 1 / 1;
       height: auto;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: var(--ddd-radius-md);
       border: var(--ddd-border-sm)var(--ddd-theme-default-error);
     }
     bull-app {
