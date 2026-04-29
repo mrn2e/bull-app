@@ -46,6 +46,7 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
       ...super.properties,
       title: { type: String },
       activePage: { type: String, reflect: true },
+      dropdownOpen: { type: Boolean, reflect: true },
     };
   }
 
@@ -107,16 +108,76 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
       gap: var(--ddd-spacing-3);
       justify-content: flex-end;
     }
-    .header-buttons button {
+    .custom-dropdown {
+      position: relative;
+    }
+    .dropdown-toggle {
       background: var(--ddd-theme-default-original87Pink);
       color: var(--ddd-theme-default-warningLight);
       padding: 12px 24px;
       border-radius: var(--ddd-radius-rounded);
       cursor: pointer;
       font: inherit;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-    .header-buttons button:hover {
+    .dropdown-toggle:hover {
       background: var(--ddd-theme-default-original87PinkHover);
+    }
+    .dropdown-toggle:focus {
+      outline: 2px solid var(--ddd-theme-default-warningLight);
+      outline-offset: 2px;
+    }
+    .dropdown-arrow {
+      transition: transform 0.2s ease;
+      font-size: 0.8em;
+    }
+    .dropdown-arrow.open {
+      transform: rotate(180deg);
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: var(--ddd-theme-default-original87Pink);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 9999;
+      min-width: 120px;
+      margin-top: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: none;
+      overflow: hidden;
+    }
+    .dropdown-menu.open {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-item {
+      background: none;
+      color: var(--ddd-theme-default-warningLight);
+      padding: 1rem;
+      border: none;
+      cursor: pointer;
+      font: inherit;
+      width: 100%;
+      text-align: left;
+      border-radius: 0;
+    }
+    .dropdown-item:hover {
+      background: var(--ddd-theme-default-original87PinkHover);
+    }
+    .dropdown-item:first-child,
+    .dropdown-item:last-child,
+    .dropdown-item:only-child {
+      border-radius: 0;
     }
     .title-wrapper img {
       cursor: pointer;
@@ -144,6 +205,42 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
     this.dispatchEvent(new CustomEvent('home-click', { bubbles: true, composed: true }));
   };
 
+  toggleDropdown = (e) => {
+    e.stopPropagation();
+    console.log('toggleDropdown called with event:', e);
+    console.log('Toggling dropdown, current state:', this.dropdownOpen);
+    this.dropdownOpen = !this.dropdownOpen;
+    console.log('New dropdown state:', this.dropdownOpen);
+  };
+
+  handleDropdownClick = (page) => {
+    if (page === 'calendar') {
+      this.handleCalendarClick();
+    } else if (page === 'roster') {
+      this.handleRosterClick();
+    } else if (page === 'about') {
+      this.handleAboutClick();
+    }
+    this.dropdownOpen = false;
+  };
+
+  connectedCallback() {
+    super.connectedCallback();
+    document.addEventListener('click', this.boundOutsideClick);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    document.removeEventListener('click', this.boundOutsideClick);
+  }
+
+  handleOutsideClick = (e) => {
+    const path = e.composedPath ? e.composedPath() : [];
+    if (!path.includes(this)) {
+      this.dropdownOpen = false;
+    }
+  };
+
   // Lit render the HTML
   render() {
   const headerData = rosterData?.header?.find(item => item.alt === 'bullicon');
@@ -159,9 +256,17 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
           </div>
         </div>
         <div class="header-buttons">
-          <button @click=${this.handleCalendarClick} id="calendarBtn">Calendar</button>
-          <button @click=${this.handleRosterClick} id="rosterBtn">Roster</button>
-          <button @click=${this.handleAboutClick} id="aboutBtn">About</button>
+          <div class="custom-dropdown">
+            <button @click=${this.toggleDropdown} class="dropdown-toggle">
+              Menu
+              <span class="dropdown-arrow ${this.dropdownOpen ? 'open' : ''}">▼</span>
+            </button>
+            <div class="${dropdownClasses}">
+              <button @click=${() => this.handleDropdownClick('calendar')} class="dropdown-item">Calendar</button>
+              <button @click=${() => this.handleDropdownClick('roster')} class="dropdown-item">Roster</button>
+              <button @click=${() => this.handleDropdownClick('about')} class="dropdown-item">About</button>
+            </div>
+          </div>
         </div>
       </header>
     </div>`;

@@ -169,33 +169,67 @@
     const demo = document.getElementById('demo');
     const pagesContainer = document.getElementById('pagesContainer');
 
-    if (banner && demo && pagesContainer) {
-      banner.addEventListener('calendar-click', () => {
+    const validPages = ['home', 'calendar', 'roster', 'about'];
+    const routeForPage = (page) => page === 'home' ? '/' : `/${page}`;
+    const pageFromPath = () => {
+      const path = window.location.pathname.replace(/\/$/, '');
+      if (path === '') return 'home';
+      const page = path.slice(1);
+      return validPages.includes(page) ? page : 'home';
+    };
+
+    const showPage = (page) => {
+      if (!banner || !demo || !pagesContainer) return;
+      const bullPages = pagesContainer.querySelector('bull-pages');
+      if (page === 'home') {
+        demo.style.display = 'block';
+        pagesContainer.style.display = 'none';
+      } else {
         demo.style.display = 'none';
         pagesContainer.style.display = 'block';
-        const bullPages = pagesContainer.querySelector('bull-pages');
-        if (bullPages) bullPages.activePage = 'calendar';
+        if (bullPages) bullPages.activePage = page;
+      }
+    };
+
+    const updateUrl = (page, replace = false) => {
+      const path = routeForPage(page);
+      const state = { page };
+      if (replace) {
+        history.replaceState(state, '', path);
+      } else {
+        history.pushState(state, '', path);
+      }
+    };
+
+    if (banner && demo && pagesContainer) {
+      banner.addEventListener('calendar-click', () => {
+        showPage('calendar');
+        updateUrl('calendar');
       });
 
       banner.addEventListener('roster-click', () => {
-        demo.style.display = 'none';
-        pagesContainer.style.display = 'block';
-        const bullPages = pagesContainer.querySelector('bull-pages');
-        if (bullPages) bullPages.activePage = 'roster';
+        showPage('roster');
+        updateUrl('roster');
       });
 
       banner.addEventListener('about-click', () => {
-        demo.style.display = 'none';
-        pagesContainer.style.display = 'block';
-        const bullPages = pagesContainer.querySelector('bull-pages');
-        if (bullPages) bullPages.activePage = 'about';
+        showPage('about');
+        updateUrl('about');
       });
 
       banner.addEventListener('home-click', () => {
-        demo.style.display = 'block';
-        pagesContainer.style.display = 'none';
+        showPage('home');
+        updateUrl('home');
       });
 
+      window.addEventListener('popstate', (event) => {
+        const page = (event.state && event.state.page) || pageFromPath();
+        showPage(page);
+      });
+
+      const initialPage = pageFromPath();
+      showPage(initialPage);
+      updateUrl(initialPage, true);
     }
   </script>
 </body>
