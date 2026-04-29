@@ -1,4 +1,4 @@
-import{i as y,b as a}from"./c3fc54f1.js";import"./b9cbd237.js";/**
+import{i as y,b as a}from"./c3fc54f1.js";import"./ab98f196.js";/**
  * Copyright 2026 Mayita
  * @license Apache-2.0, see LICENSE for full text.
  */class x extends HTMLElement{connectedCallback(){const t=this.getAttribute("type")||"",d=this.getAttribute("opponent")||"";this.innerHTML=`
