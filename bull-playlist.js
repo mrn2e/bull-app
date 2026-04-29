@@ -21,15 +21,33 @@ export class BullPlaylist extends DDDSuper(I18NMixin(LitElement)) {
     return "bull-playlist";
   }
 
-  constructor() {
-    super();
-    this.activeIndex = 0;
-    this.images = [
-      "headerimage1.jpg",
-      "headerimage2.jpeg",
-      "headerimage3.jpeg",
-    ];
+ constructor() {
+  super();
+  this.activeIndex = 0;
+  this.images = [];
+  this.loadRosterData();
+}
+
+async loadRosterData() {
+  try {
+    const response = await fetch(
+      new URL("./bull-roster-data.json", import.meta.url)
+    );
+    const data = await response.json();
+
+    this.images = data.header
+      .filter(item =>
+        item.alt === "headerimage1" ||
+        item.alt === "headerimage2" ||
+        item.alt === "headerimage3"
+      )
+      .map(item => item.imgSrc);
+
+    this.requestUpdate();
+  } catch (e) {
+    console.error("Playlist JSON failed:", e);
   }
+}
 
   static get properties() {
     return {
@@ -49,7 +67,7 @@ export class BullPlaylist extends DDDSuper(I18NMixin(LitElement)) {
       .playlist {
         position: relative;
         width: 100%;
-        background-color: #000;
+        background-color: var(--ddd-theme-default-potentialMidnight);
       }
       .arrows {
         position: absolute;
@@ -68,7 +86,7 @@ export class BullPlaylist extends DDDSuper(I18NMixin(LitElement)) {
       }
       .indicators {
         position: absolute;
-        bottom: 0;
+        bottom: var(--ddd-spacing-0);
         width: 100%;
       }
     `];

@@ -6,6 +6,8 @@ import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 
+let rosterData = null;
+
 
 
 /**
@@ -18,6 +20,22 @@ export class BullFooter extends DDDSuper(I18NMixin(LitElement)) {
 
   static get tag() {
     return "bull-footer";
+  }
+
+  constructor() {
+    super();
+    this.loadRosterData();
+  }
+
+  async loadRosterData() {
+    if (rosterData) return;
+    try {
+      const response = await fetch(new URL('./bull-roster-data.json', import.meta.url));
+      rosterData = await response.json();
+      this.requestUpdate();
+    } catch (e) {
+      console.error('Failed to load roster data:', e);
+    }
   }
 
   // Lit reactive properties
@@ -66,18 +84,18 @@ export class BullFooter extends DDDSuper(I18NMixin(LitElement)) {
       width: 56px;
       height: auto;
       display: block;
-      border-radius: 0.5rem;
+      border-radius: 8px;
     }
     .title-text h1,
     .title-text h2 {
-      margin: 0;
+      margin: var(--ddd-spacing-0);
     }
     .title-text h1 {
-      font-size: 1.75rem;
+      font-size: 28px;
       line-height: 1.1;
     }
     .title-text h2 {
-      font-size: 1rem;
+      font-size: 16px;
       color: var(--ddd-theme-default-error);
       font-weight: var(--ddd-font-weight-regular);
     }
@@ -103,14 +121,19 @@ export class BullFooter extends DDDSuper(I18NMixin(LitElement)) {
     `];
   }
 
+  handleHomeClick = () => {
+    this.dispatchEvent(new CustomEvent('home-click', { bubbles: true, composed: true }));
+  };
+
   // Lit render the HTML
   render() {
+  const headerData = rosterData?.header?.find(item => item.alt === 'bullicon');
   return html`
 
     <div class="top-banner">
       <header class="page-header">
         <div class="title-wrapper">
-          <img src="bull-icon-color.png" alt="Bull icon" @click=${this.handleHomeClick}>
+          <img src="${headerData?.imgSrc || '/images/bull-icon-color.png'}" alt="Bull icon" @click=${this.handleHomeClick}>
           <div class="title-text">
             <h1>Connect With Us</h1>
             <div class="icons">
