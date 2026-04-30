@@ -8,61 +8,11 @@ import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 import './bull-calendar-events.js';
 import './bull-playlist-arrow.js';
 
-class BullCalendar extends HTMLElement {
+class BullCalendar extends DDDSuper(I18NMixin(LitElement)) {
   connectedCallback() {
-    this.innerHTML = `
-      <style>
-        :host {
-          display: block;
-          padding: var(--ddd-spacing-4);
-        }
-        #calendar {
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-        table {
-          width: 100%;
-          border-collapse: collapse;
-        }
-        th, td {
-          border: var(--ddd-border-md);
-          padding: var(--ddd-spacing-4);
-          text-align: left;
-          position: relative;
-          min-height: 80px;
-          background-color: var(--ddd-theme-default-warningLight);
-        }
-        th {
-          background-color: var(--ddd-theme-default-original87Pink);
-          color: var(--ddd-theme-default-alertUrgent);
-        }
-        .day {
-          position: absolute;
-          top: var(--ddd-spacing-1);
-          right: var(--ddd-spacing-1);
-          font-size: var(--ddd-font-size-4xs);
-          font-weight: var(--ddd-font-weight-bold);
-        }
-        #events-list {
-          margin-top: var(--ddd-spacing-5);
-        }
-        .events-container {
-          max-height: 200px;
-          overflow-y: auto;
-          border: var(--ddd-border-xs);
-          padding: var(--ddd-spacing-2);
-        }
-        .event-item {
-          margin: var(--ddd-spacing-1) 0;
-          padding: var(--ddd-spacing-1);
-          background-color: var(--ddd-theme-default-slateMaxLight);
-          border-radius: var(--ddd-radius-xs);
-        }
-      </style>
-      <div id="calendar"></div>
-    `;
-    this.loadEvents();
-  }
+  super.connectedCallback();
+  this.loadEvents();
+}
 
   static get properties() {
     return {
@@ -73,6 +23,21 @@ class BullCalendar extends HTMLElement {
       events: { type: Array },
     };
   }
+
+  constructor() {
+  super();
+
+  this.currentMonthIndex = 0;
+  this.year = 2026;
+
+  this.months = [
+    { name: "March", month: 2 },
+    { name: "April", month: 3 },
+    { name: "May", month: 4 },
+  ];
+
+  this.events = [];
+}
 
   static get styles() {
     return [super.styles,
@@ -226,4 +191,4 @@ class BullCalendar extends HTMLElement {
   }
 }
 
-globalThis.customElements.define(BullCalendar.tag, BullCalendar);
+globalThis.customElements.define("bull-calendar", BullCalendar);

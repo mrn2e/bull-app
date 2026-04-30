@@ -226,12 +226,12 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
 
   connectedCallback() {
     super.connectedCallback();
-    document.addEventListener('click', this.boundOutsideClick);
+    document.addEventListener('click', this.handleOutsideClick);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    document.removeEventListener('click', this.boundOutsideClick);
+    document.removeEventListener('click', this.handleOutsideClick);
   }
 
   handleOutsideClick = (e) => {
@@ -244,12 +244,13 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
   // Lit render the HTML
   render() {
   const headerData = rosterData?.header?.find(item => item.alt === 'bullicon');
+  const dropdownClasses = `dropdown-menu ${this.dropdownOpen ? 'open' : ''}`;
   return html`
 
     <div class="top-banner">
       <header class="page-header">
         <div class="title-wrapper">
-          <img src="${headerData?.imgSrc || '/images/bull-icon-color.png'}" alt="Bull icon" alt="Bull icon" loading="lazy" @click=${this.handleHomeClick}>
+          <img src="${headerData?.imgSrc || '/images/bull-icon-color.png'}" alt="Bull icon" loading="lazy" @click=${this.handleHomeClick}>
           <div class="title-text">
             <h1>Bull Poker League</h1>
             <h2>Home of the Holy Cow High Rollers</h2>

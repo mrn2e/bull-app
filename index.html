@@ -120,13 +120,14 @@
   </style>
   <title>Bull Poker Leauge</title>
 </head>
+<body>
   <script type="module" src="./bull-playlist.js"></script>
   <script type="module" src="./bull-app.js"></script>
   <script type="module" src="./bull-banner.js"></script>
   <script type="module" src="./bull-pages.js"></script>
   <script type="module" src="./bull-footer.js"></script>
   <script type="module" src="./bull-roster.js"></script>
-<body>
+
   <bull-banner></bull-banner>
 
   <div id="demo">
@@ -142,16 +143,13 @@
     <section class="team-box" aria-label="Players and Bulls overview">
       <div class="team-row">
         <div class="team-label">Players</div>
-        <div class="team-images">
-          <bull-roster class="players"></bull-roster>
-        </div>
+        <div class="team-images"><bull-roster class="players"></bull-roster></div>
       </div>
       <div class="team-row">
         <div class="team-label">Bulls</div>
-        <div class="team-images">
-          <bull-roster class="bulls"></bull-roster>
-        </div>
+        <div class="team-images"><bull-roster class="bulls"></bull-roster></div>
       </div>
+    </section>
     </section>
 
     <bull-app>
@@ -163,7 +161,6 @@
   </div>
  
 <bull-footer></bull-footer>
-  </div>
 
   <script>
     const banner = document.querySelector('bull-banner');
