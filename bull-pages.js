@@ -42,7 +42,6 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
       :host {
         display: block;
         color: var(--ddd-theme-default-original87Pink);
-        background-color: var(--ddd-theme-default-alertUrgent);
         font-family: var(--ddd-font-navigation);
       }
       .wrapper {
@@ -59,6 +58,7 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         border: var(--ddd-border-md);
         border-radius: var(--ddd-radius-sm);
         background-color: var(--ddd-theme-accent);
+        color: inherit;
       }
       nav button:hover {
         background-color: var(--ddd-theme-primary);
@@ -85,7 +85,7 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         justify-content: space-between;
         gap: var(--ddd-spacing-3);
         padding: 1rem 0;
-        border-bottom: 1px solid rgba(241, 240, 204, 0.12);
+        border-bottom: 1px solid rgba(241, 240, 204, 0.1);
       }
       .team-row:last-child {
         border-bottom: none;
@@ -94,7 +94,7 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
       .team-label {
         font-size: 1.25rem;
         font-weight: 700;
-        color: #f1f0cc;
+        color: var(--ddd-theme-primary);
         white-space: nowrap;
       }
       .team-images {
@@ -109,7 +109,7 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         height: auto;
         object-fit: cover;
         border-radius: 0.75rem;
-        border: 2px solid rgba(241, 240, 204, 0.14);
+        border: 2px solid rgba(241, 240, 204, 0.2);
       }
       iframe {
         width: 100%;
@@ -118,6 +118,14 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         margin: var(--ddd-spacing-4) 0;
         border-radius: var(--ddd-radius-lg);
         border: none;
+      }
+      @media (prefers-color-scheme: dark) {
+        .team-label {
+          color: #f1f0cc;
+        }
+        .team-box p {
+          color: #e0d5b7 !important;
+        }
       }
     `];
   }
@@ -145,7 +153,7 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
             </div>
           </section>
           
-          <p style="padding: var(--ddd-spacing-4); color: var(--ddd-theme-default-original87Pink;">
+          <p style="padding: var(--ddd-spacing-4); color: var(--ddd-theme-default-original87Pink);">
             Our talented poker players bring skill, strategy, and personality to every game. Each player has been carefully selected for their expertise and competitive spirit.
           </p>
           

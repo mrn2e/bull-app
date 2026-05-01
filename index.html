@@ -46,6 +46,43 @@
     #demo {
       padding: var(--ddd-spacing-4);
     }
+
+    /* Dark Mode Support */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ddd-theme-primary: #2a2a2a;
+        --ddd-theme-accent: #4a4a4a;
+        --ddd-theme-default-original87Pink: #f48fb1;
+        --ddd-theme-default-original87PinkHover: #f06292;
+        --ddd-theme-default-warningLight: #e0e0e0;
+        --ddd-theme-default-shrineTan: #5a5a5a;
+        --ddd-theme-default-error: #ff6b6b;
+        --ddd-theme-default-alertUrgent: #1a1a1a;
+      }
+
+      :root, html, body {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+      }
+
+      .team-box {
+        background: rgba(80, 80, 80, 0.95);
+        box-shadow: inset 0 0 0 1px rgba(224, 224, 224, 0.2);
+      }
+
+      .team-row {
+        border-bottom-color: rgba(224, 224, 224, 0.15);
+      }
+
+      .team-images img {
+        border-color: rgba(224, 224, 224, 0.3);
+      }
+
+      .hero-overlay {
+        background: rgba(0, 0, 0, 0.65);
+        backdrop-filter: brightness(0.5);
+      }
+    }
     .hero-section {
       position: relative;
       width: 100%;
@@ -76,20 +113,21 @@
     .hero-text h2 {
       margin: 0 0 0.75rem;
       font-size: clamp(2rem, 4vw, 4rem);
+      color: var(--ddd-theme-default-warningLight);
       letter-spacing: 0.03em;
       line-height: 1.05;
     }
     .hero-text p {
       margin: 0;
       font-size: clamp(1rem, 2vw, 1.25rem);
-      color: rgba(241, 240, 204, 0.9);
+      color: var(--ddd-theme-default-warningLight);
     }
     .team-box {
-      background: rgba(61, 33, 18, 0.95);
+      background: var(--ddd-theme-accent);
       border-radius: 1rem;
       padding: var(--ddd-spacing-4);
       margin-bottom: var(--ddd-spacing-4);
-      box-shadow: inset 0 0 0 1px rgba(241, 240, 204, 0.12);
+      box-shadow: inset 0 0 0 1px rgba(241, 240, 204, 0.2);
     }
     .team-row {
       display: flex;
@@ -97,7 +135,7 @@
       justify-content: space-between;
       gap: var(--ddd-spacing-3);
       padding: 1rem 0;
-      border-bottom: 1px solid rgba(241, 240, 204, 0.12);
+      border-bottom: 1px solid rgba(241, 240, 204, 0.15);
     }
     .team-row:last-child {
       border-bottom: none;
@@ -121,7 +159,7 @@
       height: auto;
       object-fit: cover;
       border-radius: 0.75rem;
-      border: 2px solid rgba(241, 240, 204, 0.14);
+      border: 2px solid rgba(241, 240, 204, 0.2);
     }
     bull-app {
       margin: var(--ddd-spacing-2) 0 0;
@@ -148,7 +186,6 @@
       <div class="hero-text">
         <h2>Welcome to the Bull Poker League</h2>
         <p>High stakes, bold players, and the thrill of the table.</p>
-        <p>THANK YOU CLAUDE I BROUGHT BACK THE RIGHT CODE</p>
       </div>
     </section>
 
