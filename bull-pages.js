@@ -111,6 +111,17 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         border-radius: 0.75rem;
         border: 2px solid rgba(241, 240, 204, 0.2);
       }
+      .team-row {
+        flex-wrap: wrap;
+      }
+      .team-label {
+        white-space: normal;
+        width: 100%;
+      }
+      .team-images {
+        width: 100%;
+        grid-template-columns: repeat(auto-fit, minmax(48px, 1fr));
+      }
       iframe {
         width: 100%;
         max-width: 560px;
@@ -118,6 +129,14 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         margin: var(--ddd-spacing-4) 0;
         border-radius: var(--ddd-radius-lg);
         border: none;
+      }
+      @media (max-width: 640px) {
+        .team-row {
+          gap: var(--ddd-spacing-2);
+        }
+        .team-images {
+          gap: var(--ddd-spacing-2);
+        }
       }
       @media (prefers-color-scheme: dark) {
         .team-label {

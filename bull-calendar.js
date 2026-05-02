@@ -9,19 +9,6 @@ import './bull-calendar-events.js';
 import './bull-playlist-arrow.js';
 
 class BullCalendar extends DDDSuper(I18NMixin(LitElement)) {
-
-  constructor() {
-    super();
-    this.currentMonthIndex = 0;
-    this.year = 2026;
-    this.months = [
-      { name: "March", month: 2 },
-      { name: "April", month: 3 },
-      { name: "May", month: 4 },
-    ];
-    this.events = [];
-  }
-
   connectedCallback() {
     super.connectedCallback();
     this.loadEvents();
@@ -36,6 +23,21 @@ class BullCalendar extends DDDSuper(I18NMixin(LitElement)) {
       events: { type: Array },
     };
   }
+
+  constructor() {
+  super();
+
+  this.currentMonthIndex = 0;
+  this.year = 2026;
+
+  this.months = [
+    { name: "March", month: 2 },
+    { name: "April", month: 3 },
+    { name: "May", month: 4 },
+  ];
+
+  this.events = [];
+}
 
   static get styles() {
     return [super.styles,
@@ -58,9 +60,16 @@ class BullCalendar extends DDDSuper(I18NMixin(LitElement)) {
         max-width: 1200px;
         margin: 0 auto;
       }
+      .calendar-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
       table {
         width: 100%;
+        min-width: 100%;
         border-collapse: collapse;
+        table-layout: fixed;
       }
       th, td {
         border: var(--ddd-border-md);
@@ -69,6 +78,7 @@ class BullCalendar extends DDDSuper(I18NMixin(LitElement)) {
         position: relative;
         min-height: 80px;
         background-color: var(--ddd-theme-default-warningLight);
+        word-break: break-word;
       }
       th {
         background-color: var(--ddd-theme-default-shrineTan);
@@ -82,6 +92,25 @@ class BullCalendar extends DDDSuper(I18NMixin(LitElement)) {
       }
       #events-list {
         margin-top: var(--ddd-spacing-5);
+      }
+      @media (max-width: 640px) {
+        :host {
+          padding: var(--ddd-spacing-2);
+        }
+        .calendar-header {
+          flex-direction: column;
+          align-items: stretch;
+          gap: var(--ddd-spacing-2);
+        }
+        .month-title {
+          text-align: center;
+          font-size: 1.1rem;
+        }
+        th, td {
+          padding: var(--ddd-spacing-2);
+          min-height: 60px;
+          font-size: 0.9rem;
+        }
       }
       .events-container {
         max-height: 200px;
@@ -105,6 +134,7 @@ class BullCalendar extends DDDSuper(I18NMixin(LitElement)) {
     } else {
       this.currentMonthIndex = (this.currentMonthIndex + 1) % this.months.length;
     }
+
   }
 
   async loadEvents() {
@@ -164,16 +194,18 @@ class BullCalendar extends DDDSuper(I18NMixin(LitElement)) {
         <bull-playlist-arrow direction="right" @arrow-clicked="${this._handleArrow}"></bull-playlist-arrow>
       </div>
       <div id="calendar">
-        <table>
-          <thead>
-            <tr>
-              ${daysOfWeek.map(day => html`<th>${day}</th>`)}
-            </tr>
-          </thead>
-          <tbody>
-            ${calendarRows}
-          </tbody>
-        </table>
+        <div class="calendar-table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                ${daysOfWeek.map(day => html`<th>${day}</th>`)}
+              </tr>
+            </thead>
+            <tbody>
+              ${calendarRows}
+            </tbody>
+          </table>
+        </div>
         <div id="events-list">
           <h3>Events</h3>
           <div class="events-container">
