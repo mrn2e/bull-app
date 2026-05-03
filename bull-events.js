@@ -39,7 +39,7 @@ class BullEvents extends HTMLElement {
 
   async loadEvents() {
     try {
-      const response = await fetch('./bull-calendar-events-data.json');
+      const response = await fetch('/api/schedule');
       const events = await response.json();
       this.renderEvents(events);
     } catch (error) {
