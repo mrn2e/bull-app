@@ -157,8 +157,13 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
               <img src="/images/bull4-real.png" alt="Bull 4">
               <img src="/images/bull5.jpg" alt="Bull 5">
             </div>
-          </div>
-        </section>`
+      </div>
+          </section>
+          
+          <p style="padding: var(--ddd-spacing-4); color: var(--ddd-theme-default-original87Pink);">
+            Our majestic bulls are the heart of the Bull Poker League. These magnificent creatures represent strength, tradition, and the wild spirit of competition.
+          </p>
+        `
         : ''}
 
       ${this.activePage === 'about'
