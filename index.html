@@ -42,11 +42,11 @@
       display: grid;
       place-items: center;
       overflow: hidden;
-      border-radius: 16px;
+      border-radius: var(--ddd-radius-lg);
     }
     .hero-overlay {
       position: absolute;
-      inset: 0;
+      inset: var(--ddd-spacing-0);
       background: var(--ddd-theme-default-potentialMidnight);
       backdrop-filter: brightness(0.75);
       pointer-events: none;
@@ -66,13 +66,13 @@
       line-height: 1.05;
     }
     .hero-text p {
-      margin: 0;
+      margin: var(--ddd-spacing-0);
       font-size: clamp(1rem, 2vw, 1.25rem);
       color: var(--ddd-theme-default-warningLight);
     }
     .team-box {
       background: var(--ddd-theme-default-error);
-      border-radius: 16px;
+      border-radius: var(--ddd-radius-lg);
       padding: var(--ddd-spacing-4);
       margin-bottom: var(--ddd-spacing-4);
       box-shadow: var(--ddd-boxShadow-sm) var(--ddd-theme-default-error);
@@ -82,7 +82,7 @@
       align-items: center;
       justify-content: space-between;
       gap: var(--ddd-spacing-3);
-      padding: 1rem 0;
+      padding: var(--ddd-radius-lg);
       border-bottom:var(--ddd-border-xs) var(--ddd-theme-default-error);
     }
     .team-row:last-child {
@@ -90,7 +90,7 @@
       padding-bottom: var(--ddd-spacing-0);
     }
     .team-label {
-      font-size: 20px;
+      font-size: var(--ddd-font-size-3xs);
       font-weight: var(--ddd-font-size-bold);
       color: var(--ddd-theme-default-warningLight);
       white-space: nowrap;
@@ -98,7 +98,7 @@
     .team-images {
       display: grid;
       grid-template-columns: repeat(5, minmax(48px, 1fr));
-      gap: 12px;
+      gap: var(--ddd-spacing-3);
       width: min(100%, 60%);
     }
     .team-images img {
@@ -106,7 +106,7 @@
       aspect-ratio: 1 / 1;
       height: auto;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: var(--ddd-radius-md);
       border: var(--ddd-border-sm)var(--ddd-theme-default-error);
     }
     bull-app {
@@ -120,13 +120,14 @@
   </style>
   <title>Bull Poker Leauge</title>
 </head>
+<body>
   <script type="module" src="./bull-playlist.js"></script>
   <script type="module" src="./bull-app.js"></script>
   <script type="module" src="./bull-banner.js"></script>
   <script type="module" src="./bull-pages.js"></script>
   <script type="module" src="./bull-footer.js"></script>
   <script type="module" src="./bull-roster.js"></script>
-<body>
+
   <bull-banner></bull-banner>
 
   <div id="demo">
@@ -135,22 +136,20 @@
       <div class="hero-text">
         <h2>Welcome to the Bull Poker League</h2>
         <p>High stakes, bold players, and the thrill of the table.</p>
+        <p>THANK YOU CLAUDE I BROUGHT BACK THE RIGHT CODE</p>
       </div>
     </section>
 
     <section class="team-box" aria-label="Players and Bulls overview">
       <div class="team-row">
         <div class="team-label">Players</div>
-        <div class="team-images">
-          <bull-roster class="players"></bull-roster>
-        </div>
+        <div class="team-images"><bull-roster class="players"></bull-roster></div>
       </div>
       <div class="team-row">
         <div class="team-label">Bulls</div>
-        <div class="team-images">
-          <bull-roster class="bulls"></bull-roster>
-        </div>
+        <div class="team-images"><bull-roster class="bulls"></bull-roster></div>
       </div>
+    </section>
     </section>
 
     <bull-app>
@@ -162,40 +161,73 @@
   </div>
  
 <bull-footer></bull-footer>
-  </div>
 
   <script>
     const banner = document.querySelector('bull-banner');
     const demo = document.getElementById('demo');
     const pagesContainer = document.getElementById('pagesContainer');
 
-    if (banner && demo && pagesContainer) {
-      banner.addEventListener('calendar-click', () => {
+    const validPages = ['home', 'calendar', 'roster', 'about'];
+    const routeForPage = (page) => page === 'home' ? '/' : `/${page}`;
+    const pageFromPath = () => {
+      const path = window.location.pathname.replace(/\/$/, '');
+      if (path === '') return 'home';
+      const page = path.slice(1);
+      return validPages.includes(page) ? page : 'home';
+    };
+
+    const showPage = (page) => {
+      if (!banner || !demo || !pagesContainer) return;
+      const bullPages = pagesContainer.querySelector('bull-pages');
+      if (page === 'home') {
+        demo.style.display = 'block';
+        pagesContainer.style.display = 'none';
+      } else {
         demo.style.display = 'none';
         pagesContainer.style.display = 'block';
-        const bullPages = pagesContainer.querySelector('bull-pages');
-        if (bullPages) bullPages.activePage = 'calendar';
+        if (bullPages) bullPages.activePage = page;
+      }
+    };
+
+    const updateUrl = (page, replace = false) => {
+      const path = routeForPage(page);
+      const state = { page };
+      if (replace) {
+        history.replaceState(state, '', path);
+      } else {
+        history.pushState(state, '', path);
+      }
+    };
+
+    if (banner && demo && pagesContainer) {
+      banner.addEventListener('calendar-click', () => {
+        showPage('calendar');
+        updateUrl('calendar');
       });
 
       banner.addEventListener('roster-click', () => {
-        demo.style.display = 'none';
-        pagesContainer.style.display = 'block';
-        const bullPages = pagesContainer.querySelector('bull-pages');
-        if (bullPages) bullPages.activePage = 'roster';
+        showPage('roster');
+        updateUrl('roster');
       });
 
       banner.addEventListener('about-click', () => {
-        demo.style.display = 'none';
-        pagesContainer.style.display = 'block';
-        const bullPages = pagesContainer.querySelector('bull-pages');
-        if (bullPages) bullPages.activePage = 'about';
+        showPage('about');
+        updateUrl('about');
       });
 
       banner.addEventListener('home-click', () => {
-        demo.style.display = 'block';
-        pagesContainer.style.display = 'none';
+        showPage('home');
+        updateUrl('home');
       });
 
+      window.addEventListener('popstate', (event) => {
+        const page = (event.state && event.state.page) || pageFromPath();
+        showPage(page);
+      });
+
+      const initialPage = pageFromPath();
+      showPage(initialPage);
+      updateUrl(initialPage, true);
     }
   </script>
 </body>
@@ -210,3 +242,5 @@
 //d5bf86 > --ddd-theme-default-alertUrgent (as close as I could get ;-;)
 //8d775f > --ddd-theme-default-shrineTan
 -->
+
+<!-- THIS IS THE CODE I WANTED TO BRING BACK: IT HAS THE WORKING DROPDOWN MENU -->

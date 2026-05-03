@@ -84,18 +84,18 @@ export class BullFooter extends DDDSuper(I18NMixin(LitElement)) {
       width: 56px;
       height: auto;
       display: block;
-      border-radius: 8px;
+      border-radius: var(--ddd-radius-sm);
     }
     .title-text h1,
     .title-text h2 {
       margin: var(--ddd-spacing-0);
     }
     .title-text h1 {
-      font-size: 28px;
+      font-size: var(--ddd-font-size-3xs);
       line-height: 1.1;
     }
     .title-text h2 {
-      font-size: 16px;
+      font-size: var(--ddd-font-size-3xs);
       color: var(--ddd-theme-default-error);
       font-weight: var(--ddd-font-weight-regular);
     }
@@ -133,13 +133,13 @@ export class BullFooter extends DDDSuper(I18NMixin(LitElement)) {
     <div class="top-banner">
       <header class="page-header">
         <div class="title-wrapper">
-          <img src="${headerData?.imgSrc || '/images/bull-icon-color.png'}" alt="Bull icon" @click=${this.handleHomeClick}>
+          <img src="${headerData?.imgSrc || '/images/bull-icon-color.png'}" alt="Bull icon" loading="lazy" @click=${this.handleHomeClick}>
           <div class="title-text">
             <h1>Connect With Us</h1>
             <div class="icons">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8qOK7A5IKaNOw-ZPeg_2OOD5ZIW3JOha8FA&s">
-                <img src="https://play-lh.googleusercontent.com/KCMTYuiTrKom4Vyf0G4foetVOwhKWzNbHWumV73IXexAIy5TTgZipL52WTt8ICL-oIo">
-                <img src="https://play-lh.googleusercontent.com/kMofEFLjobZy_bCuaiDogzBcUT-dz3BBbOrIEjJ-hqOabjK8ieuevGe6wlTD15QzOqw=s256-rw">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8qOK7A5IKaNOw-ZPeg_2OOD5ZIW3JOha8FA&s" loading="lazy">
+                <img src="https://play-lh.googleusercontent.com/KCMTYuiTrKom4Vyf0G4foetVOwhKWzNbHWumV73IXexAIy5TTgZipL52WTt8ICL-oIo" loading="lazy">
+                <img src="https://play-lh.googleusercontent.com/kMofEFLjobZy_bCuaiDogzBcUT-dz3BBbOrIEjJ-hqOabjK8ieuevGe6wlTD15QzOqw=s256-rw" loading="lazy">
             </div>
           </div>
         </div>

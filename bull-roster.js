@@ -57,7 +57,7 @@ export class BullRoster extends DDDSuper(I18NMixin(LitElement)) {
         aspect-ratio: 1 / 1;
         height: auto;
         object-fit: cover;
-        border-radius: 12px;
+        border-radius: var(--ddd-radius-md);
         border: var(--ddd-border-xs) var(--ddd-theme-default-original87Pink);
       }
     `];
