@@ -57,7 +57,6 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
       :host {
         display: block;
         color: var(--ddd-theme-default-original87Pink);
-        background-color: var(--ddd-theme-default-alertUrgent);
         font-family: var(--ddd-font-navigation);
       }
       .wrapper {
@@ -74,6 +73,7 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         border: var(--ddd-border-md);
         border-radius: var(--ddd-radius-sm);
         background-color: var(--ddd-theme-accent);
+        color: inherit;
       }
       nav button:hover {
         background-color: var(--ddd-theme-primary);
@@ -133,6 +133,22 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         margin: var(--ddd-spacing-4) 0;
         border-radius: var(--ddd-radius-lg);
         border: none;
+      }
+      @media (max-width: 640px) {
+        .team-row {
+          gap: var(--ddd-spacing-2);
+        }
+        .team-images {
+          gap: var(--ddd-spacing-2);
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        .team-label {
+          color: #f1f0cc;
+        }
+        .team-box p {
+          color: #e0d5b7 !important;
+        }
       }
     `];
   }

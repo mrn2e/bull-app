@@ -59,7 +59,7 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
       display: block;
     }
     .top-banner {
-      background: var(--ddd-theme-default-shrineTan);
+      background: #3d2112;
       color: var(--ddd-theme-default-warningLight);
       padding: calc(var(--ddd-spacing-3, 0.75rem) + 0.5rem);
       margin-bottom: var(--ddd-spacing-4, 1rem);

@@ -32,6 +32,43 @@
     #demo {
       padding: var(--ddd-spacing-4);
     }
+
+    /* Dark Mode Support */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ddd-theme-primary: #2a2a2a;
+        --ddd-theme-accent: #4a4a4a;
+        --ddd-theme-default-original87Pink: #f48fb1;
+        --ddd-theme-default-original87PinkHover: #f06292;
+        --ddd-theme-default-warningLight: #e0e0e0;
+        --ddd-theme-default-shrineTan: #5a5a5a;
+        --ddd-theme-default-error: #ff6b6b;
+        --ddd-theme-default-alertUrgent: #1a1a1a;
+      }
+
+      :root, html, body {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+      }
+
+      .team-box {
+        background: rgba(80, 80, 80, 0.95);
+        box-shadow: inset 0 0 0 1px rgba(224, 224, 224, 0.2);
+      }
+
+      .team-row {
+        border-bottom-color: rgba(224, 224, 224, 0.15);
+      }
+
+      .team-images img {
+        border-color: rgba(224, 224, 224, 0.3);
+      }
+
+      .hero-overlay {
+        background: rgba(0, 0, 0, 0.65);
+        backdrop-filter: brightness(0.5);
+      }
+    }
     .hero-section {
       position: relative;
       width: 100%;
@@ -62,6 +99,7 @@
     .hero-text h2 {
       margin: 0 0 0 12px;
       font-size: clamp(2rem, 4vw, 4rem);
+      color: var(--ddd-theme-default-warningLight);
       letter-spacing: 0.03em;
       line-height: 1.05;
     }
@@ -117,6 +155,43 @@
     bull-app:hover {
       box-shadow: var(--ddd-boxShadow-sm);
     }
+    html, body {
+      min-width: 0;
+      overflow-x: hidden;
+    }
+    #demo {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    .team-row {
+      flex-wrap: wrap;
+    }
+    .team-label {
+      white-space: normal;
+      width: 100%;
+    }
+    .team-images {
+      width: 100%;
+      grid-template-columns: repeat(auto-fit, minmax(48px, 1fr));
+    }
+    iframe {
+      width: 100%;
+      max-width: 100%;
+    }
+    @media (max-width: 640px) {
+      .hero-section {
+        min-height: 260px;
+      }
+      .hero-text {
+        padding: var(--ddd-spacing-3);
+      }
+      .team-row {
+        gap: var(--ddd-spacing-2);
+      }
+      .team-images {
+        gap: var(--ddd-spacing-2);
+      }
+    }
   </style>
   <title>Bull Poker Leauge</title>
 </head>
@@ -136,7 +211,6 @@
       <div class="hero-text">
         <h2>Welcome to the Bull Poker League</h2>
         <p>High stakes, bold players, and the thrill of the table.</p>
-        <p>THANK YOU CLAUDE I BROUGHT BACK THE RIGHT CODE</p>
       </div>
     </section>
 
