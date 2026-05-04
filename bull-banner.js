@@ -8,6 +8,7 @@ import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 import "./bull-calendar.js";
 import "./bull-roster.js";
 import "./bull-events.js";
+import menuData from './api/menu-data.json';
 
 let rosterData = null;
 
@@ -214,7 +215,9 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
   };
 
   handleDropdownClick = (page) => {
-    if (page === 'calendar') {
+    if (page === 'home') {
+      this.handleHomeClick();
+    } else if (page === 'calendar') {
       this.handleCalendarClick();
     } else if (page === 'roster') {
       this.handleRosterClick();
@@ -263,9 +266,9 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
               <span class="dropdown-arrow ${this.dropdownOpen ? 'open' : ''}">▼</span>
             </button>
             <div class="${dropdownClasses}">
-              <button @click=${() => this.handleDropdownClick('calendar')} class="dropdown-item">Calendar</button>
-              <button @click=${() => this.handleDropdownClick('roster')} class="dropdown-item">Roster</button>
-              <button @click=${() => this.handleDropdownClick('about')} class="dropdown-item">About</button>
+              ${menuData?.[0]?.links?.map(link => html`
+                <button @click=${() => this.handleDropdownClick(link.page)} class="dropdown-item">${link.label}</button>
+              `) || ''}
             </div>
           </div>
         </div>

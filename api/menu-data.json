@@ -1,0 +1,27 @@
+[
+  {
+    "heading": "Navigation",
+    "links": [
+      {
+        "label": "Home",
+        "page": "home",
+        "link": "/"
+      },
+      {
+        "label": "Calendar",
+        "page": "calendar",
+        "link": "/calendar"
+      },
+      {
+        "label": "Roster",
+        "page": "roster",
+        "link": "/roster"
+      },
+      {
+        "label": "About",
+        "page": "about",
+        "link": "/about"
+      }
+    ]
+  }
+]
