@@ -8,6 +8,7 @@ import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 import "./bull-calendar.js";
 import "./bull-roster.js";
 import "./bull-events.js";
+import menuData from './api/menu.json';
 
 let rosterData = null;
 
@@ -140,6 +141,16 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
   render() {
   return html`
     <div class="wrapper">
+      <nav>
+        ${menuData?.[0]?.links?.map(link => html`
+          <button 
+            class="${this.activePage === link.page ? 'active' : ''}"
+            @click=${() => this.activePage = link.page}
+          >
+            ${link.label}
+          </button>
+        `) || ''}
+      </nav>
       ${this.activePage === 'calendar'
         ? html`<bull-calendar @event-clicked=${() => this.activePage = 'events'}></bull-calendar>`
         : ''}
