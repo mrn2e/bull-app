@@ -8,7 +8,7 @@ import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 import "./bull-calendar.js";
 import "./bull-roster.js";
 import "./bull-events.js";
-import menuData from './api/menu.json';
+import menuData from './api/menu-data.json';
 
 let rosterData = null;
 

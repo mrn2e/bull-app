@@ -113,7 +113,7 @@ class BullCalendar extends DDDSuper(I18NMixin(LitElement)) {
     try {
       const response = await fetch('/api/schedule');
       const events = await response.json();
-      this.renderCalendar(events);
+      this.events = events;
     } catch (error) {
       console.error('Error:', error);
       this.events = [];
