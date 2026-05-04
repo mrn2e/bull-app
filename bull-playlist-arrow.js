@@ -37,22 +37,22 @@ export class BullPlaylistArrow extends DDDSuper(I18NMixin(LitElement)) {
         display: block;
       }
       button {
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: var(--ddd-theme-default-potential50);
         border: none;
         border-radius: 50%;
-        color: white;
+        color: var(--ddd-theme-default-white);
         cursor: pointer;
-        font-size: 2rem;
+        font-size: var(--ddd-font-size-3xs);
         width: 48px;
         height: 48px;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 0;
+        padding: var(--ddd-spacing-0);
         transition: background-color 0.2s;
       }
       button:hover {
-        background-color: rgba(0, 0, 0, 0.8);
+        background-color: var(--ddd-theme-default-navy40);
       }
     `];
   }

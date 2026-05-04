@@ -2,11 +2,10 @@
 <html lang="en">
 
 <head>
-  <base href="/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="Description" content="Demonstration for bull-app">
-  <link rel="icon" href="bull-icon-color.png">
+  <link rel="icon" href="./images/bull-icon-color.png">
 
   <style>
     :root {
@@ -15,22 +14,9 @@
       --ddd-spacing-2: 0.5rem;
       --ddd-spacing-3: 0.75rem;
       --ddd-spacing-4: 1rem;
-      --ddd-border-md: 2px solid rgba(0, 0, 0, 0.08);
+      --ddd-border-md: 2px solid var(--ddd-theme-default-potentialMidnight);
       --ddd-radius-lg: 1rem;
-      --ddd-boxShadow-sm: 0 12px 24px rgba(0, 0, 0, 0.12);
-      
-      /* DDD Theme Colors */
-      --ddd-theme-primary: #f1f0cc; /* Light cream color for text */
-      --ddd-theme-accent: #d4c5a9; /* Tan background */
-      --ddd-theme-default-original87Pink: #e91e63;
-      --ddd-theme-default-original87PinkHover: #d81b60;
-      --ddd-theme-default-warningLight: #ffffff;
-      --ddd-theme-default-shrineTan: #d4c5a9;
-      --ddd-theme-default-error: #dc3545;
-      --ddd-theme-default-alertUrgent: #f8f9fa;
-      --ddd-font-navigation: 'Roboto', sans-serif;
-      --ddd-font-weight-bold: 700;
-      --ddd-font-size-s: 0.875rem;
+      --ddd-boxShadow-sm: 0 12px 24px var(--ddd-theme-default-potentialMidnight);
     }
 
     :root, html, body {
@@ -38,10 +24,10 @@
       padding: var(--ddd-spacing-0);
       background-color: var(--ddd-theme-default-alertUrgent);
       color: var(--ddd-theme-default-error);
-      font-family: system-ui, sans-serif;
+      font-family: var(--ddd-font-primary);
     }
     body {
-      min-height: 100vh;
+      min-height: 750px;
     }
     #demo {
       padding: var(--ddd-spacing-4);
@@ -86,19 +72,19 @@
     .hero-section {
       position: relative;
       width: 100%;
-      max-width: 100vw;
+      max-width: 1920px;
       min-height: 360px;
       margin-bottom: var(--ddd-spacing-4);
-      background: center / cover no-repeat url("heroimage.jpg");
+      background: center / cover no-repeat url("./images/bull-icon-color.png");
       display: grid;
       place-items: center;
       overflow: hidden;
-      border-radius: 1rem;
+      border-radius: var(--ddd-radius-lg);
     }
     .hero-overlay {
       position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
+      inset: var(--ddd-spacing-0);
+      background: var(--ddd-theme-default-potentialMidnight);
       backdrop-filter: brightness(0.75);
       pointer-events: none;
     }
@@ -111,46 +97,46 @@
       max-width: 90%;
     }
     .hero-text h2 {
-      margin: 0 0 0.75rem;
+      margin: 0 0 0 12px;
       font-size: clamp(2rem, 4vw, 4rem);
       color: var(--ddd-theme-default-warningLight);
       letter-spacing: 0.03em;
       line-height: 1.05;
     }
     .hero-text p {
-      margin: 0;
+      margin: var(--ddd-spacing-0);
       font-size: clamp(1rem, 2vw, 1.25rem);
       color: var(--ddd-theme-default-warningLight);
     }
     .team-box {
-      background: var(--ddd-theme-accent);
-      border-radius: 1rem;
+      background: var(--ddd-theme-default-error);
+      border-radius: var(--ddd-radius-lg);
       padding: var(--ddd-spacing-4);
       margin-bottom: var(--ddd-spacing-4);
-      box-shadow: inset 0 0 0 1px rgba(241, 240, 204, 0.2);
+      box-shadow: var(--ddd-boxShadow-sm) var(--ddd-theme-default-error);
     }
     .team-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: var(--ddd-spacing-3);
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(241, 240, 204, 0.15);
+      padding: var(--ddd-radius-lg);
+      border-bottom:var(--ddd-border-xs) var(--ddd-theme-default-error);
     }
     .team-row:last-child {
       border-bottom: none;
-      padding-bottom: 0;
+      padding-bottom: var(--ddd-spacing-0);
     }
     .team-label {
-      font-size: 1.25rem;
-      font-weight: 700;
+      font-size: var(--ddd-font-size-3xs);
+      font-weight: var(--ddd-font-size-bold);
       color: var(--ddd-theme-default-warningLight);
       white-space: nowrap;
     }
     .team-images {
       display: grid;
       grid-template-columns: repeat(5, minmax(48px, 1fr));
-      gap: 0.75rem;
+      gap: var(--ddd-spacing-3);
       width: min(100%, 60%);
     }
     .team-images img {
@@ -158,8 +144,8 @@
       aspect-ratio: 1 / 1;
       height: auto;
       object-fit: cover;
-      border-radius: 0.75rem;
-      border: 2px solid rgba(241, 240, 204, 0.2);
+      border-radius: var(--ddd-radius-md);
+      border: var(--ddd-border-sm)var(--ddd-theme-default-error);
     }
     bull-app {
       margin: var(--ddd-spacing-2) 0 0;
@@ -215,6 +201,8 @@
   <script type="module" src="./bull-banner.js"></script>
   <script type="module" src="./bull-pages.js"></script>
   <script type="module" src="./bull-footer.js"></script>
+  <script type="module" src="./bull-roster.js"></script>
+
   <bull-banner></bull-banner>
 
   <div id="demo">
@@ -229,24 +217,13 @@
     <section class="team-box" aria-label="Players and Bulls overview">
       <div class="team-row">
         <div class="team-label">Players</div>
-        <div class="team-images">
-          <img src="player1.jpg" alt="Player 1">
-          <img src="player2.jpeg" alt="Player 2">
-          <img src="player3.png" alt="Player 3">
-          <img src="player4.jpg" alt="Player 4">
-          <img src="player5.jpg" alt="Player 5">
-        </div>
+        <div class="team-images"><bull-roster class="players"></bull-roster></div>
       </div>
       <div class="team-row">
         <div class="team-label">Bulls</div>
-        <div class="team-images">
-          <img src="bull1.jpg" alt="Bull 1">
-          <img src="bull2real.png" alt="Bull 2">
-          <img src="bull3real.png" alt="Bull 3">
-          <img src="bull4-real.png" alt="Bull 4">
-          <img src="bull5.jpg" alt="Bull 5">
-        </div>
+        <div class="team-images"><bull-roster class="bulls"></bull-roster></div>
       </div>
+    </section>
     </section>
 
     <bull-app>

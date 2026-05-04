@@ -8,6 +8,9 @@ import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 import "./bull-calendar.js";
 import "./bull-roster.js";
 import "./bull-events.js";
+import menuData from './api/menu-data.json';
+
+let rosterData = null;
 
 /**
  * `bull-pages`
@@ -24,7 +27,19 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
   constructor() {
     super();
     this.activePage = 'calendar';
-   }
+    this.loadRosterData();
+  }
+
+  async loadRosterData() {
+    if (rosterData) return;
+    try {
+      const response = await fetch(new URL('./bull-roster-data.json', import.meta.url));
+      rosterData = await response.json();
+      this.requestUpdate();
+    } catch (e) {
+      console.error('Failed to load roster data:', e);
+    }
+  }
 
   // Lit reactive properties
   static get properties() {
@@ -73,34 +88,34 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         font-size: var(--bull-app-label-font-size, var(--ddd-font-size-s));
       }
       .team-box {
-        background: rgba(61, 33, 18, 0.95);
-        border-radius: 1rem;
+        background: var(--ddd-theme-default-original87Pink);
+        border-radius: var(--ddd-radius-lg);
         padding: var(--ddd-spacing-4);
         margin-bottom: var(--ddd-spacing-4);
-        box-shadow: inset 0 0 0 1px rgba(241, 240, 204, 0.12);
+        box-shadow: var(--ddd-boxShadow-sm) var(--ddd-theme-default-original87Pink);
       }
       .team-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: var(--ddd-spacing-3);
-        padding: 1rem 0;
-        border-bottom: 1px solid rgba(241, 240, 204, 0.1);
+        padding: 16px 0;
+        border-bottom: var(--ddd-border-xs) var(--ddd-theme-default-original87Pink);
       }
       .team-row:last-child {
         border-bottom: none;
-        padding-bottom: 0;
+        padding-bottom: var(--ddd-spacing-0);
       }
       .team-label {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: var(--ddd-theme-primary);
+        font-size: var(--ddd-font-size-3xs);
+        font-weight: var(--ddd-font-weight-bold);
+        color: var(--ddd-theme-default-slateMaxLight);
         white-space: nowrap;
       }
       .team-images {
         display: grid;
         grid-template-columns: repeat(5, minmax(48px, 1fr));
-        gap: 0.75rem;
+        gap: var(--ddd-spacing-3);
         width: min(100%, 60%);
       }
       .team-images img {
@@ -108,19 +123,8 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
         aspect-ratio: 1 / 1;
         height: auto;
         object-fit: cover;
-        border-radius: 0.75rem;
-        border: 2px solid rgba(241, 240, 204, 0.2);
-      }
-      .team-row {
-        flex-wrap: wrap;
-      }
-      .team-label {
-        white-space: normal;
-        width: 100%;
-      }
-      .team-images {
-        width: 100%;
-        grid-template-columns: repeat(auto-fit, minmax(48px, 1fr));
+        border-radius: var(--ddd-radius-md);
+        border: var(--ddd-border-xs) var(--ddd-theme-default-original87Pink);
       }
       iframe {
         width: 100%;
@@ -153,40 +157,42 @@ export class BullPages extends DDDSuper(I18NMixin(LitElement)) {
   render() {
   return html`
     <div class="wrapper">
+      <nav>
+        ${menuData?.[0]?.links?.map(link => html`
+          <button 
+            class="${this.activePage === link.page ? 'active' : ''}"
+            @click=${() => this.activePage = link.page}
+          >
+            ${link.label}
+          </button>
+        `) || ''}
+      </nav>
       ${this.activePage === 'calendar'
         ? html`<bull-calendar @event-clicked=${() => this.activePage = 'events'}></bull-calendar>`
         : ''}
 
       ${this.activePage === 'roster'
-        ? html`
-          <section class="team-box" aria-label="Players overview">
-            <div class="team-row">
-              <div class="team-label">Players</div>
-              <div class="team-images">
-                <img src="player1.jpg" alt="Player 1">
-                <img src="player2.jpeg" alt="Player 2">
-                <img src="player3.png" alt="Player 3">
-                <img src="player4.jpg" alt="Player 4">
-                <img src="player5.jpg" alt="Player 5">
-              </div>
+        ? html`<section class="team-box" aria-label="Players and Bulls overview">
+          <div class="team-row">
+            <div class="team-label">Players</div>
+            <div class="team-images">
+              <img src="/images/player1.jpg" alt="Player 1" loading="lazy">
+              <img src="/images/player2.jpeg" alt="Player 2" loading="lazy">
+              <img src="/images/player3.png" alt="Player 3" loading="lazy">
+              <img src="/images/player4.jpg" alt="Player 4" loading="lazy">
+              <img src="/images/player5.jpg" alt="Player 5" loading="lazy">
             </div>
-          </section>
-          
-          <p style="padding: var(--ddd-spacing-4); color: var(--ddd-theme-default-original87Pink);">
-            Our talented poker players bring skill, strategy, and personality to every game. Each player has been carefully selected for their expertise and competitive spirit.
-          </p>
-          
-          <section class="team-box" aria-label="Bulls overview">
-            <div class="team-row">
-              <div class="team-label">Bulls</div>
-              <div class="team-images">
-                <img src="bull1.jpg" alt="Bull 1">
-                <img src="bull2real.png" alt="Bull 2">
-                <img src="bull3real.png" alt="Bull 3">
-                <img src="bull4-real.png" alt="Bull 4">
-                <img src="bull5.jpg" alt="Bull 5">
-              </div>
+          </div>
+          <div class="team-row">
+            <div class="team-label">Bulls</div>
+            <div class="team-images">
+              <img src="/images/bull1.jpg" alt="Bull 1" loading="lazy">
+              <img src="/images/bull2real.png" alt="Bull 2" loading="lazy">
+              <img src="/images/bull3real.png" alt="Bull 3" loading="lazy">
+              <img src="/images/bull4-real.png" alt="Bull 4" loading="lazy">
+              <img src="/images/bull5.jpg" alt="Bull 5" loading="lazy">
             </div>
+      </div>
           </section>
           
           <p style="padding: var(--ddd-spacing-4); color: var(--ddd-theme-default-original87Pink);">

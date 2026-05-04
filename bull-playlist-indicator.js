@@ -48,17 +48,17 @@ export class BullPlaylistIndicator extends DDDSuper(I18NMixin(LitElement)) {
         width: 12px;
         height: 12px;
         border-radius: 50%;
-        border: 2px solid white;
-        background-color: transparent;
+        border: var(--ddd-border-sm) var(--ddd-theme-default-white);
+        background-color: var(--ddd-theme-default-potential0);
         cursor: pointer;
-        padding: 0;
+        padding: var(--ddd-spacing-0);
         transition: background-color 0.2s;
       }
       button.active {
-        background-color: white;
+        background-color: var(--ddd-theme-default-white);
       }
       button:hover {
-        background-color: rgba(255, 255, 255, 0.6);
+        background-color: var(--ddd-theme-default-white);
       }
     `];
   }

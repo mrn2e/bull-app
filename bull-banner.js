@@ -8,6 +8,9 @@ import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 import "./bull-calendar.js";
 import "./bull-roster.js";
 import "./bull-events.js";
+import menuData from './api/menu-data.json';
+
+let rosterData = null;
 
 
 /**
@@ -24,8 +27,18 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
 
   constructor() {
     super();
-    this.dropdownOpen = false;
-    this.boundOutsideClick = this.handleOutsideClick.bind(this);
+    this.loadRosterData();
+  }
+
+  async loadRosterData() {
+    if (rosterData) return;
+    try {
+      const response = await fetch(new URL('./bull-roster-data.json', import.meta.url));
+      rosterData = await response.json();
+      this.requestUpdate();
+    } catch (e) {
+      console.error('Failed to load roster data:', e);
+    }
   }
 
   // Lit reactive properties
@@ -75,25 +88,25 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
       width: 56px;
       height: auto;
       display: block;
-      border-radius: 0.5rem;
+      border-radius: var(--ddd-radius-sm);
     }
     .title-text h1,
     .title-text h2 {
-      margin: 0;
+      margin: var(--ddd-spacing-0);
     }
     .title-text h1 {
-      font-size: 1.75rem;
+      font-size: var(--ddd-font-size-3xs);
       line-height: 1.1;
     }
     .title-text h2 {
-      font-size: 1rem;
-      color: var(--ddd-theme-default-warningLight);
+      font-size: var(--ddd-font-size-3xs);
+      color: var(--ddd-theme-default-error);
       font-weight: var(--ddd-font-weight-regular);
     }
     .header-buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: var(--ddd-spacing-3);
       justify-content: flex-end;
     }
     .custom-dropdown {
@@ -102,7 +115,7 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
     .dropdown-toggle {
       background: var(--ddd-theme-default-original87Pink);
       color: var(--ddd-theme-default-warningLight);
-      padding: 0.75rem 1rem;
+      padding: 12px 24px;
       border-radius: var(--ddd-radius-rounded);
       cursor: pointer;
       font: inherit;
@@ -202,7 +215,9 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
   };
 
   handleDropdownClick = (page) => {
-    if (page === 'calendar') {
+    if (page === 'home') {
+      this.handleHomeClick();
+    } else if (page === 'calendar') {
       this.handleCalendarClick();
     } else if (page === 'roster') {
       this.handleRosterClick();
@@ -214,12 +229,12 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
 
   connectedCallback() {
     super.connectedCallback();
-    document.addEventListener('click', this.boundOutsideClick);
+    document.addEventListener('click', this.handleOutsideClick);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    document.removeEventListener('click', this.boundOutsideClick);
+    document.removeEventListener('click', this.handleOutsideClick);
   }
 
   handleOutsideClick = (e) => {
@@ -231,15 +246,14 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
 
   // Lit render the HTML
   render() {
-    console.log('Rendering banner, dropdownOpen:', this.dropdownOpen);
-    const dropdownClasses = `dropdown-menu ${this.dropdownOpen ? 'open' : ''}`;
-    console.log('Dropdown menu classes:', dropdownClasses);
-    return html`
+  const headerData = rosterData?.header?.find(item => item.alt === 'bullicon');
+  const dropdownClasses = `dropdown-menu ${this.dropdownOpen ? 'open' : ''}`;
+  return html`
 
     <div class="top-banner">
       <header class="page-header">
         <div class="title-wrapper">
-          <img src="bull-icon-color.png" alt="Bull icon" @click=${this.handleHomeClick}>
+          <img src="${headerData?.imgSrc || '/images/bull-icon-color.png'}" alt="Bull icon" loading="lazy" @click=${this.handleHomeClick}>
           <div class="title-text">
             <h1>Bull Poker League</h1>
             <h2>Home of the Holy Cow High Rollers</h2>
@@ -252,9 +266,9 @@ export class BullBanner extends DDDSuper(I18NMixin(LitElement)) {
               <span class="dropdown-arrow ${this.dropdownOpen ? 'open' : ''}">▼</span>
             </button>
             <div class="${dropdownClasses}">
-              <button @click=${() => this.handleDropdownClick('calendar')} class="dropdown-item">Calendar</button>
-              <button @click=${() => this.handleDropdownClick('roster')} class="dropdown-item">Roster</button>
-              <button @click=${() => this.handleDropdownClick('about')} class="dropdown-item">About</button>
+              ${menuData?.[0]?.links?.map(link => html`
+                <button @click=${() => this.handleDropdownClick(link.page)} class="dropdown-item">${link.label}</button>
+              `) || ''}
             </div>
           </div>
         </div>
